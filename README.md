@@ -59,11 +59,11 @@ Roboto
 
 
 
-### Considerations Made (TBD, WIP)
+### Considerations Made
 
 -  **Hapi vs Express**
 
-  Before this project, I had never worked with Hapi before. Before I had recently heard about it and decided to give it a try. It is [slower than Express](https://raygun.com/blog/hapi-vs-express/) according to reports, but also (in my personal opinion) easier and faster to get up and running. As this project wasn't heavily focused on back-end programming, I figured I'd give Hapi a try and I'm positively surprised.
+    Before this project, I had never worked with Hapi before. Before I had recently heard about it and decided to give it a try. It is [slower than Express](https://raygun.com/blog/hapi-vs-express/) according to reports, but also (in my personal opinion) easier and faster to get up and running. As this project wasn't heavily focused on back-end programming, I figured I'd give Hapi a try and I'm positively surprised.
 
 - **Fetch vs XHR**
 
