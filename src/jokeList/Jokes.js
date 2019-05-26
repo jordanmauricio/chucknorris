@@ -15,10 +15,15 @@ const Jokes = () => {
     const hookCheck = [joke_ids.join(',')];
     let favRef = favorites;
 
-    const fetchData = async () => {
-        await fetch('http://localhost:9001/chuck')
+    const fetchData = async (amount = 10) => {
+        await fetch(`http://localhost:9001/chuck?amount=${amount}`)
             .then(res => res.json())
-            .then(res => setJokes(res.jokes))
+            .then(res => {
+                if(amount === 1){
+                    return addJoke(res.jokes)
+                }
+                return setJokes(res.jokes);
+            })
             .catch(err => console.error('Fetch error:', err));
     };
 
@@ -32,7 +37,9 @@ const Jokes = () => {
     };
 
     const addJoke = ( joke ) => {
+        let fav = favorites;
         const exists = favorites.some(({id}) => id === joke.id);
+        console.log('fav:', fav, 'ids:', joke_ids);
         if( !exists && favorites.length <= 9){
             favRef = favRef.concat(joke);
 
@@ -78,7 +85,8 @@ const Jokes = () => {
             />
             <FavoriteList
                 jokes={favorites}
-                fetchData={fetchJokes}
+                fetchJokes={fetchJokes}
+                fetchData={fetchData}
                 removeJoke={removeJoke}
             />
         </div>
@@ -88,8 +96,19 @@ const Jokes = () => {
 const jokeColumns = css`
     display: grid;
     grid-template-columns: 55% 35%;
-    grid-template-rows: 100%;
     justify-content: center;
+
+    @media (max-width: 770px) {
+        grid-template-columns: 1fr;
+
+        > div {
+            margin-bottom: 100px;
+        }
+
+        ol {
+            padding-left: 0.5em;
+        }
+    }
 `
 
 export default Jokes;

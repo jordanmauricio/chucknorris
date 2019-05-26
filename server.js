@@ -45,12 +45,14 @@ const init = async () => {
 
             const amount = req.query.amount ? req.query.amount : 10;
 
+            console.log("amount:", amount);
+
             let jokes = await fetch(`http://api.icndb.com/jokes/random/${amount}?escape=javascript`)
                 .then(res => res.json())
                 .catch(err => console.log('Fetch error', err));
             
             if( jokes.type !== 'success') return 'Something went wrong.';
-
+            
             return { jokes: jokes.value };
         },
     });

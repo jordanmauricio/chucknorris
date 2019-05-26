@@ -2,15 +2,15 @@
 import { css, jsx } from '@emotion/core';
 import JokeRow from './JokeRow';
 
-const JokeList = ({ jokes, fetchData, addJoke, removeJoke }) => (
+const JokeList = ({ jokes, fetchData, addJoke }) => (
     <div css={listStyle}>
         <h1>Jokes!</h1>
         <ol>
             {jokes.map((joke, index) => (
                 <JokeRow 
-                    key={index}
-                    joke={joke}
-                    addJoke={addJoke}
+                key={index}
+                joke={joke}
+                addJoke={addJoke}
                 />
             ))}
         </ol>

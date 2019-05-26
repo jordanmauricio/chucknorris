@@ -66,6 +66,7 @@ Roboto
 -  CSS-in-JS
 -  LocalStorage vs Cookie
 -  Why not Axios
+-  Accessibility (a11y) neglected
 
 
 
