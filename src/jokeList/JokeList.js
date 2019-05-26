@@ -1,18 +1,29 @@
 import React from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 import JokeRow from './JokeRow';
 
-const JokeList = ({ jokes, fetchData }) => (
-    <div>
+const JokeList = ({ jokes, fetchData, addJoke, removeJoke }) => (
+    <div css={listStyle}>
         <h1>Jokes!</h1>
         <ol>
-            {jokes.map((joke, index) => {
-                return <JokeRow key={index} joke={joke}></JokeRow>
-            })}
+            {jokes.map((joke, index) => (
+                <JokeRow 
+                    key={index} 
+                    joke={joke}
+                    addJoke={addJoke}
+                    removeJoke={removeJoke}
+                />
+            ))}
         </ol>
         <button type="button" onClick={(e) => fetchData()}>
             Get new jokes!
         </button>
     </div>
-)
+);
+
+const listStyle = css`
+    width: 65vw;
+`
 
 export default JokeList;
