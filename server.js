@@ -1,5 +1,10 @@
 const Hapi = require('@hapi/hapi')
+const Path = require('path')
 const fetch = require('node-fetch')
+
+const plugins = [
+    require('@hapi/inert'),
+]
 
 const init = async () => {
     const server = Hapi.server({
@@ -7,12 +12,26 @@ const init = async () => {
         host: 'localhost',
     });
 
+    await server.register(plugins);
+
+    server.route({
+        method: 'GET',
+        path: '/{path*}',
+        handler: {
+            directory: {
+                path: Path.join(__dirname, 'build'),
+                listing: false,
+                index: true,
+            },
+        },
+    });
+
     server.route({
         method: 'GET',
         path: '/hello',
         handler: (req, h) => {
             return 'hello world';
-        }
+        },
     });
 
     await server.start();
