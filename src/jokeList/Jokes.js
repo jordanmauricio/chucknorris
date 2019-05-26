@@ -17,6 +17,9 @@ const Jokes = () => {
     };
 
     const fetchJokes = async () => {
+        const joke_ids = [];
+        favorites.forEach(fav => joke_ids.push(fav.id));
+        console.log('fetc:', joke_ids);
         // await fetch('http://localhost:9001/chuck')
         //     .then(res => res.json())
         //     .then(res => setJokes(res.jokes))
@@ -41,8 +44,6 @@ const Jokes = () => {
     useEffect(() => {
         fetchData();
     }, []);
-
-    console.log(favorites);
 
     if(jokes === false){
         return <h1>Loading...</h1>;
