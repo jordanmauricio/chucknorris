@@ -22,11 +22,11 @@ const JokeList = () => {
             <button type="button" onClick={(e) => fetchData()}>
                 Get new jokes!
             </button>
-            <ul>
+            <ol>
                 {jokes.map((joke, index) => {
                     return <JokeRow index={index} joke={joke.joke}></JokeRow>
                 })}
-            </ul>
+            </ol>
         </div>
     }
 }

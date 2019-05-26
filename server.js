@@ -43,7 +43,7 @@ const init = async () => {
         path: '/chuck',
         handler: async (req, h) => {
 
-            let jokes = await fetch('http://api.icndb.com/jokes/random/10')
+            let jokes = await fetch('http://api.icndb.com/jokes/random/10?escape=javascript')
                 .then(res => res.json())
                 .catch(err => console.log('Fetch error', err));
             
