@@ -34,6 +34,21 @@ const init = async () => {
         },
     });
 
+    server.route({
+        method: 'GET',
+        path: '/chuck',
+        handler: async (req, h) => {
+
+            let jokes = await fetch('http://api.icndb.com/jokes/random/10')
+                .then(res => res.json())
+                .catch(err => console.log('Fetch error', err));
+            
+            if( jokes.type !== 'success') return 'Something went wrong.';
+
+            return { jokes: jokes.value };
+        },
+    });
+
     await server.start();
     console.log("Magic happens on %s", server.info.uri);
 };
