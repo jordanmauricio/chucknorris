@@ -1,12 +1,12 @@
 import React from 'react';
 import { Global, css } from '@emotion/core';
-import JokeList from './jokeList/JokeList';
+import Jokes from './jokeList/Jokes';
 
 function App() {
   return (
     <div className="App">
       <Global styles={globalStyle}/>
-      <JokeList />
+      <Jokes />
     </div>
   );
 }
@@ -29,6 +29,16 @@ const globalStyle = css`
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Kaushan Script', cursive;
     color: var(--darkPurple);
+  }
+
+  button {
+    background-color: var(--aqua);
+    color: var(--darkPurple);
+    padding: 20px 40px;
+    font-size: 21px;
+    border: 1px solid var(--darkPurple);
+    border-radius: 5px;
+    cursor: pointer;
   }
 `;
 
