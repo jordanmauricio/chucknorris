@@ -14,7 +14,6 @@ const JokeRow = ({ joke, addJoke, removeJoke }) => {
     }
 };
 
-// TODO(fix button height)
 const jokeRowStyle = css`
     display: flex;
     flex-flow: row nowrap;

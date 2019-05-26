@@ -6,6 +6,7 @@
     "@emotion/core": "^10.0.10",
     "@hapi/hapi": "^18.3.1",
     "@hapi/inert": "^5.2.0",
+    "concurrently": "^4.1.0",
     "node-fetch": "^2.6.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -15,7 +16,8 @@
     "store": "^2.0.12"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently --kill-others \"npm run server\" \"npm run dev\"",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

@@ -43,10 +43,7 @@ const Jokes = () => {
         if( !exists && favorites.length <= 9){
             favRef = favRef.concat(joke);
 
-            const ids = extractIds(favRef);
-            store.set('joke_ids', ids);
-            setJokeIds(ids);
-            return setFavorites(favRef);
+            return updateFavorites(favRef);
         }
     }
 
@@ -55,15 +52,20 @@ const Jokes = () => {
         if( favRef.indexOf(joke) >= 0 ){
             favRef = favRef.filter(fav => fav !== joke)
             
-            const ids = extractIds(favRef);
-            store.set('joke_ids', ids);
-            setJokeIds(ids);
-            return setFavorites(favRef);
+            return updateFavorites(favRef);
         }
     }
 
     const extractIds = ( joke_arr ) => {
         return joke_arr.map(joke => joke.id );
+    }
+
+    const updateFavorites = (favRef) => {
+
+        const ids = extractIds(favRef);
+        store.set('joke_ids', ids);
+        setJokeIds(ids);
+        return setFavorites(favRef);
     }
 
     useEffect(() => {
