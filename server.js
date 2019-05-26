@@ -7,9 +7,13 @@ const plugins = [
 ]
 
 const init = async () => {
+    // TODO(adjust cors for specific routes)
     const server = Hapi.server({
         port: 9001,
         host: 'localhost',
+        routes: {
+            cors: true,
+        }
     });
 
     await server.register(plugins);
