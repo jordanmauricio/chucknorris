@@ -23,6 +23,9 @@ const JokeList = ({ jokes, fetchData, addJoke, removeJoke }) => (
 );
 
 const listStyle = css`
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
     width: 65vw;
 `
 
