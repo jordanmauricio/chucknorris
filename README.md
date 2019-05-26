@@ -27,9 +27,9 @@ Resource in question: http://api.icndb.com/jokes/random/10
 - [x] Setup project
 - [x] Fetch 10 jokes
 - [x] Fetch on button press
-- [ ] Add joke to favorites list
-- [ ] Favorite list has max 10 **unique** jokes
-- [ ] Remove joke from favorite list
+- [x] Add joke to favorites list
+- [x] Favorite list has max 10 **unique** jokes
+- [x] Remove joke from favorite list
 - [ ] Add favorites list to browser storage
 - [ ] Activate timer to fetch 1 random joke every 5 seconds to be added to favorites list
 - [ ] Make it look nice

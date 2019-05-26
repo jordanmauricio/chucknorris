@@ -64,8 +64,9 @@ const Jokes = () => {
 
 const jokeColumns = css`
     display: grid;
-    grid-template-columns: 60vw 40vw;
+    grid-template-columns: 55vw 35vw;
     grid-template-rows: 100%;
+    justify-content: center;
 `
 
 export default Jokes;
