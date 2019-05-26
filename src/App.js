@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <Global styles={globalStyle}/>
-      <Jokes />
+      <Jokes css={wrapper} />
     </div>
   );
 }
@@ -40,6 +40,12 @@ const globalStyle = css`
     border-radius: 5px;
     cursor: pointer;
   }
+`;
+
+const wrapper = css`
+  max-width: 1920px;
+  margin: 0 30px;
+  box-sizing: border-box;
 `;
 
 export default App;

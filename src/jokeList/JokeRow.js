@@ -2,13 +2,19 @@ import React from 'react';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 
-const JokeRow = ({ joke, addJoke, removeJoke }) => (
-    <li css={jokeRowStyle}>
-        <p onClick={(e) => addJoke(joke)}>{joke.joke}</p>
-        <button type="button" alt="remove joke" onClick={(e) => removeJoke(joke)}>
-        </button>
-    </li>
-);
+const JokeRow = ({ joke, addJoke, removeJoke }) => {
+    if( addJoke ){
+        return <li css={jokeRowStyle}>
+            <p onClick={(e) => addJoke(joke)}>{joke.joke}</p>
+        </li>
+    } else {
+        return <li css={jokeRowStyle}>
+            <p>{joke.joke}</p>
+            <button type="button" alt="remove joke" onClick={(e) => removeJoke(joke)}>
+            </button>
+        </li>
+    }
+};
 
 // TODO(fix button height)
 const jokeRowStyle = css`

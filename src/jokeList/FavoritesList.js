@@ -3,21 +3,18 @@ import React from 'react';
 import { css, jsx } from '@emotion/core';
 import JokeRow from './JokeRow';
 
-const JokeList = ({ jokes, fetchData, addJoke, removeJoke }) => (
+const FavoriteList = ({ jokes, fetchData, removeJoke }) => (
     <div css={listStyle}>
-        <h1>Jokes!</h1>
+        <h1>Favorite Jokes</h1>
         <ol>
             {jokes.map((joke, index) => (
                 <JokeRow 
-                    key={index}
+                    key={index} 
                     joke={joke}
-                    addJoke={addJoke}
+                    removeJoke={removeJoke}
                 />
             ))}
         </ol>
-        <button type="button" onClick={(e) => fetchData()}>
-            Get new jokes!
-        </button>
     </div>
 );
 
@@ -27,4 +24,4 @@ const listStyle = css`
     align-items: center;
 `
 
-export default JokeList;
+export default FavoriteList;
