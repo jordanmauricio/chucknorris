@@ -7,13 +7,9 @@ const plugins = [
 ]
 
 const init = async () => {
-    // TODO(adjust cors for specific routes)
     const server = Hapi.server({
         port: 9001,
         host: 'localhost',
-        routes: {
-            cors: true,
-        }
     });
 
     await server.register(plugins);
@@ -41,30 +37,36 @@ const init = async () => {
     server.route({
         method: 'GET',
         path: '/chuck',
-        handler: async (req, h) => {
-
-            const amount = req.query.amount ? req.query.amount : 10;
-
-            console.log("amount:", amount);
-
-            let jokes = await fetch(`http://api.icndb.com/jokes/random/${amount}?escape=javascript`)
-                .then(res => res.json())
-                .catch(err => console.log('Fetch error', err));
-            
-            if( jokes.type !== 'success') return 'Something went wrong.';
-            
-            return { jokes: jokes.value };
-        },
+        options: {
+            cors: true,
+            handler: async (req, h) => {
+    
+                const amount = req.query.amount ? req.query.amount : 10;
+    
+                console.log("amount:", amount);
+    
+                let jokes = await fetch(`http://api.icndb.com/jokes/random/${amount}?escape=javascript`)
+                    .then(res => res.json())
+                    .catch(err => console.log('Fetch error', err));
+                
+                if( jokes.type !== 'success') return 'Something went wrong.';
+                
+                return { jokes: jokes.value };
+            },
+        }
     });
 
     server.route({
         method: 'GET',
         path: '/specific-jokes',
-        handler: async (req, h) => {
-            const joke_ids = req.query.jokes.split(',');
-            const jokes = get_specific_jokes(joke_ids);
-
-            return jokes;
+        options: {
+            cors: true,
+            handler: async (req, h) => {
+                const joke_ids = req.query.jokes.split(',');
+                const jokes = get_specific_jokes(joke_ids);
+    
+                return jokes;
+            }
         }
     })
 

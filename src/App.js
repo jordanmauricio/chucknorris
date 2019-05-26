@@ -6,7 +6,13 @@ function App() {
   return (
     <div className="App">
       <Global styles={globalStyle}/>
+      <div className="center">
+        <img alt="chuck norris gif" src="https://media.giphy.com/media/uG5Q7bmKppnUc/giphy.gif"/>
+      </div>
       <Jokes css={wrapper} />
+      <div className="center">
+        <img alt="chuck norris gif" src="https://media.giphy.com/media/RMQ7kUUhfcYj6/giphy.gif"/>
+      </div>
     </div>
   );
 }
@@ -40,12 +46,22 @@ const globalStyle = css`
     border-radius: 5px;
     cursor: pointer;
   }
+
+  .center {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 const wrapper = css`
   max-width: 1920px;
   margin: 0 30px;
   box-sizing: border-box;
+`;
+
+const imgGif = css`
+  display: flex;
+  justify-content: center;
 `;
 
 export default App;

@@ -37,9 +37,7 @@ const Jokes = () => {
     };
 
     const addJoke = ( joke ) => {
-        let fav = favorites;
         const exists = favorites.some(({id}) => id === joke.id);
-        console.log('fav:', fav, 'ids:', joke_ids);
         if( !exists && favorites.length <= 9){
             favRef = favRef.concat(joke);
 
@@ -99,6 +97,7 @@ const jokeColumns = css`
     display: grid;
     grid-template-columns: 55% 35%;
     justify-content: center;
+    margin: 20px 0;
 
     @media (max-width: 770px) {
         grid-template-columns: 1fr;

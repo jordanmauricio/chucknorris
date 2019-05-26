@@ -31,8 +31,8 @@ Resource in question: http://api.icndb.com/jokes/random/10
 - [x] Favorite list has max 10 **unique** jokes
 - [x] Remove joke from favorite list
 - [x] Add favorites list to browser storage
-- [ ] Activate timer to fetch 1 random joke every 5 seconds to be added to favorites list
-- [ ] Make it look nice
+- [x] Activate timer to fetch 1 random joke every 5 seconds to be added to favorites list
+- [x] Make it look nice
 
 
 
@@ -67,6 +67,7 @@ Roboto
 -  LocalStorage vs Cookie
 -  Why not Axios
 -  Accessibility (a11y) neglected
+-  Animations
 
 
 
