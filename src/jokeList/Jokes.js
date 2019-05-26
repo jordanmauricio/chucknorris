@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import JokeList from './JokeList';
 import FavoriteList from './FavoritesList';
 
+import store from 'store';
+
 const Jokes = () => {
+    const stored_ids = store.get('joke_ids') ? store.get('joke_ids') : [];
     const [ jokes, setJokes ] = useState(false);
     const [ favorites, setFavorites ] = useState([]);
+    const [ joke_ids, setJokeIds] = useState(stored_ids);
+    
+    const hookCheck = [joke_ids.join(',')];
     let favRef = favorites;
 
     const fetchData = async () => {
@@ -16,20 +22,23 @@ const Jokes = () => {
             .catch(err => console.error('Fetch error:', err));
     };
 
-    const fetchJokes = async () => {
-        const joke_ids = [];
-        favorites.forEach(fav => joke_ids.push(fav.id));
-        console.log('fetc:', joke_ids);
-        // await fetch('http://localhost:9001/chuck')
-        //     .then(res => res.json())
-        //     .then(res => setJokes(res.jokes))
-        //     .catch(err => console.error('Fetch error:', err));
+    const fetchJokes = async (joke_ids) => {
+        if( joke_ids.length > 0 ){
+            await fetch(`http://localhost:9001/specific-jokes?jokes=${joke_ids}`)
+                .then(res => res.json())
+                .then(res => setFavorites(res))
+                .catch(err => console.error('Fetch error:', err));
+        }
     };
 
     const addJoke = ( joke ) => {
         if( favRef.indexOf(joke) === -1 ){
             favRef = favRef.concat(joke);
-            return setFavorites(favRef)
+
+            const ids = extractIds(favRef);
+            store.set('joke_ids', ids);
+            setJokeIds(ids);
+            return setFavorites(favRef);
         }
     }
 
@@ -37,13 +46,25 @@ const Jokes = () => {
         // using filter to trigger re-render on newly created array
         if( favRef.indexOf(joke) >= 0 ){
             favRef = favRef.filter(fav => fav !== joke)
-            return setFavorites(favRef)
+            
+            const ids = extractIds(favRef);
+            store.set('joke_ids', ids);
+            setJokeIds(ids);
+            return setFavorites(favRef);
         }
+    }
+
+    const extractIds = ( joke_arr ) => {
+        return joke_arr.map(joke => joke.id );
     }
 
     useEffect(() => {
         fetchData();
     }, []);
+
+    useEffect(() => {
+        fetchJokes(joke_ids);
+    }, hookCheck);
 
     if(jokes === false){
         return <h1>Loading...</h1>;
@@ -65,7 +86,7 @@ const Jokes = () => {
 
 const jokeColumns = css`
     display: grid;
-    grid-template-columns: 55vw 35vw;
+    grid-template-columns: 55% 35%;
     grid-template-rows: 100%;
     justify-content: center;
 `

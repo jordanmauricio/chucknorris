@@ -53,9 +53,37 @@ const init = async () => {
         },
     });
 
+    server.route({
+        method: 'GET',
+        path: '/specific-jokes',
+        handler: async (req, h) => {
+            const joke_ids = req.query.jokes.split(',');
+            const jokes = get_specific_jokes(joke_ids);
+
+            return jokes;
+        }
+    })
+
     await server.start();
     console.log("Magic happens on %s", server.info.uri);
 };
+
+const get_specific_jokes = async ids => {
+    return await Promise.all(ids.map(async id => {
+        const data = await fetch(`http://api.icndb.com/jokes/${parseInt(id)}?escape=javascript`);
+        const result = await data.json();
+
+        if( result.type !== 'success'){
+            // not found error
+            if(result.value.includes('No quote with id')) return { id: result.id, error: result.value, msg: 'Joke not found.' };
+            
+            // generic error
+            return { id: result.id, error: result.value, msg: 'Something went wrong.' };
+        }
+
+        return result.value;
+    }))
+}
 
 process.on('unhandledRejection', (err) => {
     console.log("Server rejection error:", err);
