@@ -6,13 +6,17 @@ const FavoriteList = ({ jokes, fetchData, removeJoke }) => (
     <div css={listStyle}>
         <h1>Favorite Jokes</h1>
         <ol>
-            {jokes.map((joke, index) => (
+            {jokes.length > 0 ? 
+            jokes.map((joke, index) => (
                 <JokeRow 
                     key={index} 
                     joke={joke}
                     removeJoke={removeJoke}
                 />
-            ))}
+            ))
+            :
+            <p>You don't seem to have any favourites yet</p>
+            }
         </ol>
     </div>
 );

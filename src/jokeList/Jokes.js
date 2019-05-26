@@ -32,7 +32,8 @@ const Jokes = () => {
     };
 
     const addJoke = ( joke ) => {
-        if( favRef.indexOf(joke) === -1 ){
+        const exists = favorites.some(({id}) => id === joke.id);
+        if( !exists && favorites.length <= 9){
             favRef = favRef.concat(joke);
 
             const ids = extractIds(favRef);
